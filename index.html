@@ -1,58 +1,50 @@
-<strong>v2.2</strong>
-<iframe
-  id="nemId"
-  style="width: 100vw; height: 95vh;"
-></iframe>
-<script>
-  const nemIdFrame = document.getElementById('nemId');
-
-  nemIdFrame.src = `https://appletk.danid.dk/launcher/lmt/${Date.now()}`;
-  
-  const receiveMessage = (event) => {
-    console.log(event);
-    alert(`${event.origin}, ${JSON.stringify(event.data)}`);
-    
-    const { command, content } = JSON.parse(event.data);
-
-    if (event.origin === 'https://appletk.danid.dk') {
-      if (window.ReactNativeWebView != null) {
-        alert(`RNWV: ${typeof window.ReactNativeWebView.postMessage}, ${JSON.stringify(Object.keys(window.ReactNativeWebView))}`);
-        window.ReactNativeWebView.postMessage(event.data);
-        alert('Sent!');
-      } else {
-        alert('RNWebView is null!');
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width">
+    <style>
+      html, body {
+        margin: 0;
       }
-    }
-    /*
-    if (command === 'SendParameters') {
-      const msg = JSON.stringify({
-          command: 'parameters',
-          content: params,
-        });
-      console.log({ msg });
-      nemIdFrame.contentWindow.postMessage(
-        msg,
-        'https://appletk.danid.dk/',
-      );
-    } else {
-      console.log({ command, content });
-      console.log({ code: atob(content) });
-    }
-    */
-  };
-  
-  const sendNemIdMessage = (message) => {
-    alert('Sending message to NemID');
-    window.ReactNativeWebView.postMessage(message);
+    </style>
+  </head>
+  <body>
+    <iframe
+      id="nemId"
+      style="width: 100vw; height: 100vh;"
+    ></iframe>
+    <script>
+      const nemIdFrame = document.getElementById('nemId');
 
-    nemIdFrame.contentWindow.postMessage(
-      message,
-      'https://appletk.danid.dk/',
-    );  }
-  window.addEventListener("message", receiveMessage, true);
-  window.onerror = (...args) => alert('global error - ' + JSON.stringify(args));
-  alert('Done loading JS');
-  
-  const a = null;
-  a();
-</script>
+      nemIdFrame.src = `https://appletk.danid.dk/launcher/lmt/${Date.now()}`;
+
+      const receiveMessage = (event) => {
+        console.log(event);
+        alert(`${event.origin}, ${JSON.stringify(event.data)}`);
+
+        const { command, content } = JSON.parse(event.data);
+
+        if (event.origin === 'https://appletk.danid.dk') {
+          if (window.ReactNativeWebView != null) {
+            alert(`RNWV: ${typeof window.ReactNativeWebView.postMessage}, ${JSON.stringify(Object.keys(window.ReactNativeWebView))}`);
+            window.ReactNativeWebView.postMessage(event.data);
+            alert('Sent!');
+          } else {
+            alert('RNWebView is null!');
+          }
+        }
+      };
+
+      const sendNemIdMessage = (message) => {
+        alert('Sending message to NemID');
+        window.ReactNativeWebView.postMessage(message);
+
+        nemIdFrame.contentWindow.postMessage(
+          message,
+          'https://appletk.danid.dk/',
+        );
+      };
+      window.addEventListener("message", receiveMessage, true);
+      window.onerror = (...args) => alert('global error - ' + JSON.stringify(args));
+    </script>
+  </body>
+</html>
