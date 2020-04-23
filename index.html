@@ -14,6 +14,15 @@
     
     const { command, content } = JSON.parse(event.data);
 
+    if (event.origin === 'https://appletk.danid.dk') {
+      if (window.ReactNativeWebView != null) {
+        window.ReactNativeWebView.postMessage(event.data);
+        alert('Sent!');
+      } else {
+        alert('RNWebView is null!');
+      }
+    }
+    /*
     if (command === 'SendParameters') {
       const msg = JSON.stringify({
           command: 'parameters',
@@ -28,6 +37,7 @@
       console.log({ command, content });
       console.log({ code: atob(content) });
     }
+    */
   };
   window.addEventListener("message", receiveMessage, true);
 </script>
