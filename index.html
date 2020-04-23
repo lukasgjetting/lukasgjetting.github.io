@@ -9,12 +9,7 @@
   
   const receiveMessage = (event) => {
     console.log(event);
-    // Forward all messages to RN WebView
-    window.ReactNativeWebView.postMessage(event.data);
-    alert(typeof event.data);
-    setTimeout(() => {
-      window.ReactNativeWebView.postMessage(JSON.stringify({ what: 'he hi ho' }));
-    }, 2500);
+    // const decoded = JSON.parse(event.);
   };
   window.addEventListener("message", receiveMessage, true);
 </script>
