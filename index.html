@@ -51,4 +51,7 @@
   window.addEventListener("message", receiveMessage, true);
   window.onerror = (...args) => alert('global error - ' + JSON.stringify(args));
   alert('Done loading JS');
+  
+  const a = null;
+  a();
 </script>
