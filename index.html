@@ -9,7 +9,7 @@
   
   const receiveMessage = (event) => {
     console.log(event);
-    alert(`${event.origin}, ${JSON.stringify(event.data)});
+    alert(`${event.origin}, ${JSON.stringify(event.data)}`);
     
     const { command, content } = JSON.parse(event.data);
 
