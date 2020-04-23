@@ -1,6 +1,7 @@
+<strong>v2</strong>
 <iframe
   id="nemId"
-  style="width: 100vw; height: 100vh;"
+  style="width: 100vw; height: 95vh;"
 ></iframe>
 <script>
   const nemIdFrame = document.getElementById('nemId');
@@ -48,6 +49,6 @@
       'https://appletk.danid.dk/',
     );  }
   window.addEventListener("message", receiveMessage, true);
-  window.onerror((...args) => alert('global error - ' + JSON.stringify(args)));
+  window.onerror = (...args) => alert('global error - ' + JSON.stringify(args));
   alert('Done loading JS');
 </script>
