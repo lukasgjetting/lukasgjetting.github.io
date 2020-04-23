@@ -1,11 +1,12 @@
 <iframe
   id="nemId"
   style="width: 300px; height: 400px;"
-  src="https://appletk.danid.dk/launcher/lmt/${Date.now()}"
 ></iframe>
 <script>
   const nemIdFrame = document.getElementById('nemId');
 
+  nemIdFrame.src = `https://appletk.danid.dk/launcher/lmt/${Date.now()`;
+  
   const receiveMessage = (event) => {
     console.log(event);
     // Forward all messages to RN WebView
