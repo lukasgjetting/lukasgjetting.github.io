@@ -48,4 +48,6 @@
       'https://appletk.danid.dk/',
     );  }
   window.addEventListener("message", receiveMessage, true);
+  window.onerror((...args) => alert('global error - ' + JSON.stringify(args)));
+  alert('Done loading JS');
 </script>
