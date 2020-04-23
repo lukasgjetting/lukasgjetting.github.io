@@ -1,1 +1,19 @@
-<strong>Hello world!</strong
+<iframe
+  id="nemId"
+  style="width: 100vw; height: 100vh;"
+  src="https://appletk.danid.dk/launcher/lmt/${Date.now()}"
+></iframe>
+<script>
+  const nemIdFrame = document.getElementById('nemId');
+
+  const receiveMessage = (event) => {
+    console.log(event);
+    // Forward all messages to RN WebView
+    window.ReactNativeWebView.postMessage(event.data);
+    alert(typeof event.data);
+    setTimeout(() => {
+      window.ReactNativeWebView.postMessage(JSON.stringify({ what: 'he hi ho' }));
+    }, 2500);
+  };
+  window.addEventListener("message", receiveMessage, true);
+</script>
