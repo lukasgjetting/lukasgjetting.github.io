@@ -15,7 +15,7 @@
 
     if (event.origin === 'https://appletk.danid.dk') {
       if (window.ReactNativeWebView != null) {
-        window.ReactNativeWebView.postMessage(event.data);
+        window.ReactNativeWebView.postMessage(event.data, '*');
         alert('Sent!');
       } else {
         alert('RNWebView is null!');
@@ -38,5 +38,14 @@
     }
     */
   };
+  
+  const sendNemIdMessage = (message) => {
+    alert('Sending message to NemID');
+    window.ReactNativeWebView.postMessage(message, '*');
+
+    nemIdFrame.contentWindow.postMessage(
+      message,
+      'https://appletk.danid.dk/',
+    );  }
   window.addEventListener("message", receiveMessage, true);
 </script>
