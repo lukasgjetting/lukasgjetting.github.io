@@ -1,4 +1,4 @@
-<strong>v2.1</strong>
+<strong>v2.2</strong>
 <iframe
   id="nemId"
   style="width: 100vw; height: 95vh;"
@@ -17,7 +17,7 @@
     if (event.origin === 'https://appletk.danid.dk') {
       if (window.ReactNativeWebView != null) {
         alert(`RNWV: ${typeof window.ReactNativeWebView.postMessage}, ${JSON.stringify(Object.keys(window.ReactNativeWebView))}`);
-        window.ReactNativeWebView.postMessage(event.data, '*');
+        window.ReactNativeWebView.postMessage(event.data);
         alert('Sent!');
       } else {
         alert('RNWebView is null!');
@@ -43,7 +43,7 @@
   
   const sendNemIdMessage = (message) => {
     alert('Sending message to NemID');
-    window.ReactNativeWebView.postMessage(message, '*');
+    window.ReactNativeWebView.postMessage(message);
 
     nemIdFrame.contentWindow.postMessage(
       message,
