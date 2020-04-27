@@ -38,9 +38,6 @@
       };
 
       const sendNemIdMessage = (message) => {
-        // alert('Sending message to NemID');
-        window.ReactNativeWebView.postMessage(message);
-
         nemIdFrame.contentWindow.postMessage(
           message,
           'https://appletk.danid.dk/',
