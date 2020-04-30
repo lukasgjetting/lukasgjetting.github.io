@@ -16,9 +16,20 @@
       style="width: 100vw; height: 100vh;"
     ></iframe>
     <script>
+      const origin = location.hash.includes('test') ?
+            'https://appletk.danid.dk' :
+            'https://applet.danid.dk';
+      
+      const mode = location.hash.includes('lmt') ?
+            'lmt' :
+            'std';
+
+      const url = `https://${domain}/launcher/${mode}/${Date.now()}`;
+      
+      
       const nemIdFrame = document.getElementById('nemId');
 
-      nemIdFrame.src = `https://appletk.danid.dk/launcher/lmt/${Date.now()}`;
+      nemIdFrame.src = url;
 
       const receiveMessage = (event) => {
         console.log(event);
@@ -26,7 +37,7 @@
 
         const { command, content } = JSON.parse(event.data);
 
-        if (event.origin === 'https://appletk.danid.dk') {
+        if (event.origin === origin) {
           if (window.ReactNativeWebView != null) {
             // alert(`RNWV: ${typeof window.ReactNativeWebView.postMessage}, ${JSON.stringify(Object.keys(window.ReactNativeWebView))}`);
             window.ReactNativeWebView.postMessage(event.data);
@@ -40,7 +51,7 @@
       const sendNemIdMessage = (message) => {
         nemIdFrame.contentWindow.postMessage(
           message,
-          'https://appletk.danid.dk/',
+          origin,
         );
       };
       window.addEventListener("message", receiveMessage, true);
